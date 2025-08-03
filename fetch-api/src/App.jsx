@@ -1,36 +1,47 @@
 import { userData } from "./api/Userdata";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import Postcard from "./api/Postcard";
 
 function App() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [post, setpost] = useState([]);
+  const [data, setData] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchpost = async () => {
+  //     const response = await fetch(
+  //       "https://jsonplaceholder.typicode.com/posts/1"
+  //     );
+  //     const data = await response.json();
+  //     setpost(data);
+  //     console.log(data);
+  //   };
+
+  //   fetchpost();
+  // }, []);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users") // Example public API
-      .then((response) => response.json())
-      .then((data) => {
-        setUsers(data);
-        setLoading(false);
-        console.log(data)
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      });
-  }, []); // empty dependency array = runs once on mount
-
-  if (loading) return <p>Loading...</p>;
+    userData().then((posts) => setData(posts));
+  }, []);
 
   return (
     <>
       <div>
-        <h2>Users List</h2>
-        <ul>
-          {users.map((user) => (
-            <li key={user.id}>{user.name},{user.username},{user.email}</li>
-          ))}
-        </ul>
+        <h1>User Details</h1>
+
+        {data ? (
+          data.map((e, index) => (
+            <Postcard key={index} title={e.title} body={e.body} />
+          ))
+        ) : (
+          <p>nodata</p>
+        )}
+
+        {/* {data.map((e) => (
+          <li key={e.id}>
+            {e.userId},{e.title},{e.body}
+          </li>
+        ))} */}
       </div>
     </>
   );
