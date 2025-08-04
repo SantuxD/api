@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchdata } from "../api/fetch";
+// import Deletedata from "./Deletedata";
+import { data } from "react-router";
 
 const Fetchuserdetails = () => {
   const [userdata, setuserdata] = useState([]);
@@ -7,6 +9,19 @@ const Fetchuserdetails = () => {
   useEffect(() => {
     fetchdata().then((data) => setuserdata(data));
   }, []);
+
+  const DeleteData = async (id) => {
+    const response = await fetch("http://localhost:3000/users" + "/" + id, {
+      method: "delete",
+    });
+    const resdata = await response.json();
+    if (response) {
+      alert("Record Deleted");
+    }
+    console.log(id);
+ 
+    
+  };
 
   return (
     <>
@@ -21,6 +36,8 @@ const Fetchuserdetails = () => {
         ) : (
           <p>No data find</p>
         )}
+
+        <button onClick={() => DeleteData(data.id)}>Delete</button>
       </div>
     </>
   );
