@@ -1,6 +1,24 @@
 {
-  "users": [
-    { "id": 1, "name": "Santu", "age": 25, "email": "santu@example.com" },
-    { "id": 2, "name": "Ravi", "age": 30, "email": "ravi@example.com" }
-  ]
+    "users": [
+        {
+            "id": 1,
+            "name": "Santu",
+            "age": 25,
+            "email": "santu@example.com"
+        },
+        {
+            "id": 2,
+            "name": "Ravi",
+            "age": 30,
+            "email": "ravi@example.com"
+        },
+
+        {
+            "id": 3,
+             "name": "leo",
+             "age" : 25,
+             "email": "leo@example.com"
+
+        }
+    ]
 }
